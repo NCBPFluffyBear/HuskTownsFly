@@ -1,0 +1,13 @@
+name: HuskTownsFly
+author: NCBPFluffyBear
+description: Restricts player flight to their own towns
+main: io.ncbpfluffybear.husktownsfly.HuskTownsFly
+version: ${project.version}
+api-version: 1.16
+
+depend: [HuskTowns]
+
+permissions:
+  husktownsfly.bypass:
+    default: op
+    description: Bypass fly prevention
