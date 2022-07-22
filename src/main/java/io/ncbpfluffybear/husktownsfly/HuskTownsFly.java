@@ -1,6 +1,6 @@
 package io.ncbpfluffybear.husktownsfly;
 
-import me.william278.husktowns.HuskTownsAPI;
+import net.william278.husktowns.HuskTownsAPI;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
