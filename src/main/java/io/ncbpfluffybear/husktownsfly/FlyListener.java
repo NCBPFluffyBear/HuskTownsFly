@@ -1,6 +1,6 @@
 package io.ncbpfluffybear.husktownsfly;
 
-import me.william278.husktowns.chunk.ClaimedChunk;
+import net.william278.husktowns.chunk.ClaimedChunk;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
