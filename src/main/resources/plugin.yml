@@ -3,7 +3,7 @@ author: NCBPFluffyBear
 description: Restricts player flight to their own towns
 main: io.ncbpfluffybear.husktownsfly.HuskTownsFly
 version: ${project.version}
-api-version: 1.16
+api-version: 1.20
 
 depend: [HuskTowns]
 

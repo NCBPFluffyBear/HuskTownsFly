@@ -1,8 +1,12 @@
 package io.ncbpfluffybear.husktownsfly;
 
-import me.william278.husktowns.chunk.ClaimedChunk;
+import net.william278.husktowns.chunk.ClaimedChunk;
+import net.william278.husktowns.claim.TownClaim;
+import net.william278.husktowns.town.Member;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import java.util.Optional;
 
 public class CheckFlyTask implements Runnable {
     @Override
@@ -12,25 +16,20 @@ public class CheckFlyTask implements Runnable {
                 continue;
             }
 
-            String playerTown = HuskTownsFly.getApi().getPlayerTown(p);
-            if (playerTown == null) {
+            Optional<Member> playerTown = HuskTownsFly.getApi().getUserTown(p);
+            if (playerTown.isEmpty()) {
                 disableFlight(p);
                 return;
             }
 
-            ClaimedChunk chunk = HuskTownsFly.getApi().getClaimedChunk(p.getLocation());
-            if (chunk == null) {
+            Optional<TownClaim> chunk = HuskTownsFly.getApi().getClaimAt(p.getLocation());
+            if (chunk.isEmpty()) {
                 disableFlight(p);
                 return;
             }
 
-            String currTown = chunk.getTown();
-            if (currTown == null) {
-                disableFlight(p);
-                return;
-            }
 
-            if (!playerTown.equalsIgnoreCase(currTown)) {
+            if (!chunk.get().town().equals(playerTown.get().town())) {
                 disableFlight(p);
             }
         }

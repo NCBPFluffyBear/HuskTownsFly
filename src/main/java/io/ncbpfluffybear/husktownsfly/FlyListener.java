@@ -1,11 +1,14 @@
 package io.ncbpfluffybear.husktownsfly;
 
-import me.william278.husktowns.chunk.ClaimedChunk;
+import net.william278.husktowns.claim.TownClaim;
+import net.william278.husktowns.town.Member;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
+
+import java.util.Optional;
 
 public class FlyListener implements Listener {
 
@@ -22,25 +25,20 @@ public class FlyListener implements Listener {
 
             Player p = e.getPlayer();
 
-            String playerTown = HuskTownsFly.getApi().getPlayerTown(p);
-            if (playerTown == null) {
+            Optional<Member> playerTown = HuskTownsFly.getApi().getUserTown(p);
+            if (playerTown.isEmpty()) {
                 cancelFlight(e);
                 return;
             }
 
-            ClaimedChunk chunk = HuskTownsFly.getApi().getClaimedChunk(p.getLocation());
-            if (chunk == null) {
+            Optional<TownClaim> chunk = HuskTownsFly.getApi().getClaimAt(p.getLocation());
+            if (chunk.isEmpty()) {
                 cancelFlight(e);
                 return;
             }
 
-            String currTown = chunk.getTown();
-            if (currTown == null) {
-                cancelFlight(e);
-                return;
-            }
 
-            if (!currTown.equalsIgnoreCase(playerTown)) {
+            if (!chunk.get().town().equals(playerTown.get().town())) {
                 cancelFlight(e);
             }
         }
